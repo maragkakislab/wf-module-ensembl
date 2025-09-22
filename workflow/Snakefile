@@ -1,0 +1,41 @@
+#### load config ####
+if "--configfile" in sys.argv:
+    i = sys.argv.index("--configfile")
+    config_path = sys.argv[i + 1]
+    configfile: config_path
+else:
+    config_path = "config/config.yml"
+    configfile: config_path
+
+
+#### set variables from config ####
+OUT_DIR = config['OUT_DIR']
+SITE_URL = config['SITE_URL']
+VERSION = config['VERSION']
+FTP_URL = config['FTP_URL']
+GTF_URL = config['GTF_URL']
+GENOME_URL = config['GENOME_URL']
+META = config['ASSEMBLY_META']
+
+
+##### include rules #####
+include: "rules/ensembl.smk"
+
+
+# Rule run_all collects all outputs to force execution of the whole pipeline.
+localrules: run_all
+rule run_all:
+    input:
+        # GTF files
+        expand(OUT_DIR + "/{assembly}/genes.gtf",
+            assembly=['GRCh38', 'GRCm39']),
+        # Genome files
+        expand(OUT_DIR + "/{assembly}/genome.fa",
+            assembly=['GRCh38', 'GRCm39']),
+        # Transcriptome files
+        expand(OUT_DIR + "/{assembly}/transcriptome.fa",
+            assembly=['GRCh38', 'GRCm39']),
+        # Tables with transcript and gene ids
+        expand(OUT_DIR + "/{assembly}/transcript-gene-ids.tab",
+            assembly=['GRCh38', 'GRCm39']),
+        

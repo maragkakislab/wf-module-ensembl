@@ -1,0 +1,31 @@
+# Directories used in workflow.
+OUT_DIR: "ensembl" # Dir where files will be downloaded to. A subdir per
+                   # assembly will be created.
+
+# The ensembl version to be used. ATTENTION: To change the ensembl version, both
+# the SITE_URL and VERSION need to be updated.
+SITE_URL: 'http://may2025.archive.ensembl.org'
+VERSION: '114'
+
+# The base FPT URL for downloading files from ensembl.
+FTP_URL: 'ftp://ftp.ensembl.org/pub'
+
+# GTF_URL template for downloading the gene model from ensembl.
+# eg. ftp://ftp.ensembl.org/pub/release-114/gtf/homo_sapiens/Homo_sapiens.GRCh38.114.gtf.gz
+GTF_URL: '{FTP_URL}/release-{VERSION}/gtf/{SPECIES_NAME_LC}/{SPECIES_NAME}.{ASSEMBLY}.{VERSION}.gtf.gz'
+
+# GENOME_URL template for downloading the genome file from ensembl.
+# eg. ftp://ftp.ensembl.org/pub/release-114/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+GENOME_URL: '{FTP_URL}/release-{VERSION}/fasta/{SPECIES_NAME_LC}/dna/{SPECIES_NAME}.{ASSEMBLY}.dna_sm.primary_assembly.fa.gz'
+
+# Metadata mappings for assembly.
+ASSEMBLY_META: {
+  "GRCh38": {
+    "name": "Homo sapiens",
+    "id": "hsapiens",
+  },
+  "GRCm39": {
+    "name": "Mus musculus",
+    "id": "mmusculus",
+  },
+}
