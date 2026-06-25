@@ -46,7 +46,7 @@ Then in a consuming snakefile:
 ```python
 module ensembl:
     snakefile:
-        github("maragkakislab/wf-module-ensembl", path="workflow/Snakefile")
+        github("maragkakislab/wf-module-ensembl", path="workflow/Snakefile", tag="v1.0.1")
     config:
         config["ENSEMBL"]
 
