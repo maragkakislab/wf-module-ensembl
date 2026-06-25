@@ -79,7 +79,7 @@ rule build_tab_file_with_transcript_and_gene_ids:
         attr = "".join(['<Attribute name = "'+ a +'" />' for a in 
             ['ensembl_transcript_id', 'ensembl_gene_id',
              'external_transcript_name', 'external_gene_name',
-             'description', 'transcript_tsl']]),
+             'transcript_tsl', 'description']]),
         dclose = '</Dataset>',
         qclose = '</Query>'
     resources:
@@ -91,6 +91,8 @@ rule build_tab_file_with_transcript_and_gene_ids:
 
         tail -n 1 {output}.tmp | grep '\[success\]' || (echo 'Missing [success] stamp' && exit 1)
 
-        head -n -1 {output}.tmp > {output}
+        head -n -1 {output}.tmp \
+	| sed -E 's/[[:space:]]+\[Source:[^]]+\]$//' \
+	> {output}
         rm {output}.tmp
         """
