@@ -79,7 +79,7 @@ rule build_tab_file_with_transcript_and_gene_ids:
         attr = "".join(['<Attribute name = "'+ a +'" />' for a in 
             ['ensembl_transcript_id', 'ensembl_gene_id',
              'external_transcript_name', 'external_gene_name',
-             'transcript_tsl']]),
+             'transcript_tsl', 'description']]),
         dclose = '</Dataset>',
         qclose = '</Query>'
     resources:
