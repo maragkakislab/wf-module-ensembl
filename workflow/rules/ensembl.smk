@@ -91,8 +91,6 @@ rule build_tab_file_with_transcript_and_gene_ids:
 
         tail -n 1 {output}.tmp | grep '\[success\]' || (echo 'Missing [success] stamp' && exit 1)
 
-        head -n -1 {output}.tmp \
-	| sed -E 's/[[:space:]]+\[Source:[^]]+\]$//' \
-	> {output}
+        head -n -1 {output}.tmp > {output}
         rm {output}.tmp
         """
